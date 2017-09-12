@@ -26,7 +26,7 @@ void heat_process(void);
 void heat_stop_with_off_delay(void);
 /* USER CODE END Prototypes */
 
-#define MiniHeatPwm   450//400=60k,480=50K
+#define MiniHeatPwm   400//400=60k,480=50K
 #define StartHeatPwm  490//400=60k,480=50K,600=40k
 #define nopan_delay  2000
 #define PowerDistributePeriod 2000

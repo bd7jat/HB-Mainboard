@@ -161,10 +161,10 @@ void task0_AdSample(void)
 	if (ad_current>=500)
     para.rCurrent=(ad_current*46+8600)/100;//unit 0.01A*/
 	
-	if (ad_current<240)
+	if (ad_current<170)
 		para.rCurrent=0;
 	else
-		para.rCurrent=(ad_current*49+6100)/100;//unit 0.01A
+		para.rCurrent=(ad_current*59+1200)/100;//unit 0.01A6100
 		
 	if (para.bCurfact&0x100)
 			para.rCurrent=para.rCurrent-(para.bCurfact&0xff);
@@ -178,16 +178,16 @@ void task0_AdSample(void)
   else
 		para.rVoltage=para.rVoltage+(para.bVolfact&0xff);  
 
-  uint8_t power_factor=10;	
-  if	(para.rCurrent>=300)
-	     power_factor=10;
-  if	((para.rCurrent<300)&&(para.rCurrent>=200))
-	     power_factor=9;	
+  uint8_t power_factor=100;	
+  if	(para.rCurrent>=200)
+	     power_factor=100;
+  //if	((para.rCurrent<200)&&(para.rCurrent>=150))
+	    // power_factor=9;	
 	if	(para.rCurrent<200)
-	     power_factor=8;	
+	     power_factor=95;	
 	
 	para.rPower=para.rCurrent*para.rVoltage/100;//unit 0.1W
-	para.rPower=para.rPower*power_factor/10;//unit 0.1W,correct power factor
+  para.rPower=para.rPower*power_factor/100;//unit 0.1W,correct power factor
 	
 	
 	para.rTempsink=ad_sink;

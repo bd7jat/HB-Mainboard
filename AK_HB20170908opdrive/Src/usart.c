@@ -169,7 +169,7 @@ void Parameters_Init(void)
 	para.mCurrent=1100;//max current                 10.00A
 	para.mPower=3000;//min continuously heat power  300.0W
 	para.mPulse=1150;//1265=19k,1230=19.5k,1200=20k,max pwm pulse
-	para.mRsplength=14;//max returning data length    2
+	para.mRsplength=16;//max returning data length    2
 	para.mTemperature=1050;//max heatsink temperatue  1100=92,1250=87
 	para.mVoltage=2600;//max voltage                260.00V
 	pwm_pulse=0;//                                     0
