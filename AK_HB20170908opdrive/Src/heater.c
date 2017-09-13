@@ -148,13 +148,13 @@ void heat_adjust(void)
 		 counter_add++;
 	if ((para.rPower<target_power)&&(counter_add==0)&&(counter_throttle==0)&&(para.rCurrent<(para.mCurrent-40)))
 			    {
-						if ((target_power-para.rPower)>500)
+						if ((target_power-para.rPower)>300)
 							pwm_pulse_set(pwm_pulse++);
 								
 			    }
 	if	(para.rPower>target_power)	 
 			{ 	
-				 if ((para.rPower-target_power>500))
+				 if ((para.rPower-target_power>300))
              {
 							 pwm_pulse=pwm_pulse-5;
 							 pwm_pulse_set(pwm_pulse);
@@ -263,13 +263,6 @@ void heat_protect(void)
 	static uint16_t counter_zeropower=0;
 	if (heatstep==4)//check pan status
 	 { 
-		  /*if  ((pwm_pulse>1000)&&(para.rPower<(para.mPower+3000)))
-			{
-
-					heat_stop_with_on_delay();
-					ErrorReport(ERROR_L_LOAD);
-				}
-			}*/
 			if (para.rPower<(para.mPower+4000))
 					 {
 								counter_movepandelay++;

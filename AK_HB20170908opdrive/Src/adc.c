@@ -154,17 +154,10 @@ void task0_AdSample(void)
  flag_adc++;			
 		
   	
-	/*if (ad_current<215)
-		para.rCurrent=0;
-	if ((ad_current>=215)&&(ad_current<500))
-		para.rCurrent=(ad_current*687-48257)/1000;//unit 0.01A
-	if (ad_current>=500)
-    para.rCurrent=(ad_current*46+8600)/100;//unit 0.01A*/
-	
-	if (ad_current<170)
+	if (ad_current<210)
 		para.rCurrent=0;
 	else
-		para.rCurrent=(ad_current*59+1200)/100;//unit 0.01A6100
+		para.rCurrent=(ad_current*54+500)/100;//unit 0.01A6100
 		
 	if (para.bCurfact&0x100)
 			para.rCurrent=para.rCurrent-(para.bCurfact&0xff);
