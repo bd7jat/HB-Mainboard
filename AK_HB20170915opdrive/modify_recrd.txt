@@ -1,0 +1,24 @@
+.LOG
+
+
+Roger'note for mainboard program.
+
+1/20170304,figure out usart_dma hal-lib bug, reinitialize uart when received data is wrong.
+
+2/20170419,power control with protetion and surge
+
+3/20170426,figure out that pwm output stop for 1.2ms while adjust pwm.
+
+18:59 2017/4/26
+
+15:27 2017/5/17 for hbcore v0.31
+
+18:42 2017/5/22 use new key list
+
+14:04 2017/9/8
+1/fixed usart send bug ,make sure send and receive action will not happen at the same time 
+2/decrease usart send length down to 32 bytes
+11:49 2017/9/14
+add power calibrate function,the highest bit of base data is used as a sign ,1 stands for negetive, 0 stands for postive, when the upper master sends calibrate datas ,pay attention to base data , the biggest data of base should be less than 0x8000
+16:34 2017/9/15
+calibrate function done ,only calibrate current data
