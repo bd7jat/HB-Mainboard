@@ -10,6 +10,7 @@
 
 extern uint16_t task_delay[];
 
+extern uint8_t LoadTestReference;
 extern uint32_t AdcTank[32];
 extern uint8_t BoardReveivedData[50];
 extern AD_parameter  AdcQueue;
@@ -132,7 +133,7 @@ void SendBoardCMD(uint16_t mask,uint16_t value)
 	BoardTx[6]=mask;
 	BoardTx[7]=value>>8;
   BoardTx[8]=0x26;
-	BoardTx[9]=0x09;	
+	BoardTx[9]=LoadTestReference;	
 	//BoardTx[9]=0x01;	
 	j=0;
 	for (i=0;i<10;i++)

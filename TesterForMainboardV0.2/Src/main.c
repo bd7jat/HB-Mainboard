@@ -46,7 +46,7 @@
 #include "stdio.h"
 #include "..\MyCode\global_variable.h"
 /* USER CODE BEGIN Includes */
-
+extern uint8_t LoadTestReference;
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
@@ -120,7 +120,8 @@ int main(void)
 
 
   /* USER CODE BEGIN 2 */
-	LedBeeper.beeper=0x11;
+	LedBeeper.beeper=0x15;
+	LoadTestReference=1;
 	TestStatus.test_step=0;
 	TestStatus.error_code =0;
 	TestStatus.test_instruction =0;

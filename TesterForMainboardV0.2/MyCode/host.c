@@ -3,6 +3,7 @@
 #include "usart.h"
 #include "..\MyCode\global_variable.h"
 
+extern uint8_t LoadTestReference;
 extern uint16_t task_delay[];
 static  uint8_t test_order=0;
 extern uint8_t BoardReveivedData[50];
@@ -49,7 +50,7 @@ void task1_TestHandle(void)
 		TestStatus.test_step=0;
 		if(TestStatus.test_instruction==1)
 		{
-			TestStatus.test_step=1;
+			TestStatus.test_step=2;
 			test_order=1;
 		}
 		if(TestStatus.test_instruction==2)
@@ -150,7 +151,8 @@ void ResetTest (void)
    HAL_GPIO_WritePin(GPIOD, S_220V_Pin|S_3V4_Pin, GPIO_PIN_RESET);
    HAL_GPIO_WritePin(PROG_START_GPIO_Port, PROG_START_Pin, GPIO_PIN_SET);
    HAL_GPIO_WritePin(S_PROG_GPIO_Port, S_PROG_Pin, GPIO_PIN_RESET);
-			
+//HAL_GPIO_WritePin(GPIOC, S_LAMP_Pin, GPIO_PIN_SET);
+   //HAL_GPIO_WritePin(GPIOD, S_220V_Pin, GPIO_PIN_SET);			
 }
 
 void TestShortCurrent(void)//TestStep1,jump options 2,3,18
@@ -159,7 +161,7 @@ void TestShortCurrent(void)//TestStep1,jump options 2,3,18
 	HAL_GPIO_WritePin(S_220V_GPIO_Port,S_220V_Pin,GPIO_PIN_SET);
 	HAL_GPIO_WritePin(S_LAMP_GPIO_Port,S_LAMP_Pin,GPIO_PIN_RESET);
 	ShortCurrentCounter++;
-	if (ShortCurrentCounter>20)
+	if (ShortCurrentCounter>30)
 	{
 		ShortCurrentCounter=0;
 		if (AdcQueue.current<40)//detect overload of mainboard
@@ -174,12 +176,13 @@ void TestShortCurrent(void)//TestStep1,jump options 2,3,18
 						 TestStatus.test_step=2; 
 					TestStatus.error_code=0;
 					TestStatus.test_percent=5;	
-					HAL_GPIO_WritePin(S_LAMP_GPIO_Port,S_LAMP_Pin,GPIO_PIN_RESET);		
-          HAL_GPIO_WritePin(S_220V_GPIO_Port,S_220V_Pin,GPIO_PIN_RESET);					
+					//HAL_GPIO_WritePin(S_LAMP_GPIO_Port,S_LAMP_Pin,GPIO_PIN_RESET);		
+          //HAL_GPIO_WritePin(S_220V_GPIO_Port,S_220V_Pin,GPIO_PIN_RESET);					
 			 }
 	  else
 		{
 		     TestStatus.error_code=1;
+			   LedBeeper.beeper=0x1f;
 				 TestStatus.test_step=0;	
 	       HAL_GPIO_WritePin(S_220V_GPIO_Port,S_220V_Pin,GPIO_PIN_RESET);
 	       HAL_GPIO_WritePin(S_LAMP_GPIO_Port,S_LAMP_Pin,GPIO_PIN_RESET);			   
@@ -195,14 +198,15 @@ void TestShortCurrent(void)//TestStep1,jump options 2,3,18
 	
 void TestProgram(void)//TestStep2,jump options 3,20
 {
- static uint8_t ProgramCounter=0;	
+ static uint16_t ProgramCounter=0;	
  static uint8_t ProgramStep=0;
    switch (ProgramStep)
 				{
 					case 0://
-						HAL_GPIO_WritePin(S_220V_GPIO_Port,S_220V_Pin,GPIO_PIN_SET);//power on 220V to supply 3.3v and 18v
+						HAL_GPIO_WritePin(S_220V_GPIO_Port,S_220V_Pin,GPIO_PIN_RESET);//power off 220V
+					  HAL_GPIO_WritePin(S_LAMP_GPIO_Port,S_LAMP_Pin,GPIO_PIN_RESET);
 						HAL_GPIO_WritePin(S_PROG_GPIO_Port, S_PROG_Pin, GPIO_PIN_SET);//enable analog switchers of programming
-					  HAL_GPIO_WritePin(S_5V_GPIO_Port,S_5V_Pin,GPIO_PIN_SET);//make sure DIO and CLK pin is open-drain state		
+					  HAL_GPIO_WritePin(S_3V4_GPIO_Port, S_3V4_Pin, GPIO_PIN_SET);	
 					  ProgramCounter++;
 					  if (ProgramCounter>20)
 						{
@@ -230,6 +234,15 @@ void TestProgram(void)//TestStep2,jump options 3,20
 									ProgramCounter=0;
 								}
 							}
+						if (ProgramCounter>800)//out of waitting time 4s
+						{
+							  ProgramCounter=0;
+							  ProgramStep=0;
+								TestStatus.test_step=0; 
+							  TestStatus.error_code=2;
+							  printf ("\n\r program fail!");	
+							  LedBeeper.beeper=0x1f;
+						}
 						break;
 					case 3://
 					  if(HAL_GPIO_ReadPin(PROG_OK_GPIO_Port,PROG_OK_Pin)==0)//if get signal of sucess
@@ -251,10 +264,13 @@ void TestProgram(void)//TestStep2,jump options 3,20
 						{
 								TestStatus.test_step=0; 
 							  TestStatus.error_code=2;
-							  printf ("\n\r program fail!");			
+							  printf ("\n\r program fail!");	
+                LedBeeper.beeper=0x1f;							
 						}
 						ProgramStep=0;
-						HAL_GPIO_WritePin(S_PROG_GPIO_Port, S_PROG_Pin, GPIO_PIN_RESET);//disable analog switchers of programming					
+						HAL_GPIO_WritePin(S_PROG_GPIO_Port, S_PROG_Pin, GPIO_PIN_RESET);//disable analog switchers of programming	
+						HAL_GPIO_WritePin(S_220V_GPIO_Port,S_220V_Pin,GPIO_PIN_RESET);	
+            HAL_GPIO_WritePin(S_3V4_GPIO_Port, S_3V4_Pin, GPIO_PIN_RESET);						
 						break;						
 					default://
 						break;					
@@ -275,7 +291,7 @@ void TestH18V(void)//TestStep3
 						    HAL_GPIO_WritePin(S_220V_GPIO_Port,S_220V_Pin,GPIO_PIN_SET);	
                 HAL_GPIO_WritePin(S_LAMP_GPIO_Port,S_LAMP_Pin,GPIO_PIN_SET);	
 						    H18VCounter++;
-					      if (H18VCounter>20)
+					      if (H18VCounter>100)
 								{
 									H18VCounter=0;
 									H18VStep=1;
@@ -294,7 +310,8 @@ void TestH18V(void)//TestStep3
 								  H18VStep=0;
 									TestStatus.test_step=0; 
 									TestStatus.error_code=3;	
-									printf ("\n\r H18V fail!");		
+									printf ("\n\r H18V fail!");	
+                  LedBeeper.beeper=0x1f;								
 							}						
 						break;
 					default://
@@ -315,7 +332,8 @@ void Test18V(void)//TestStep4
 	else
 	{
 		  TestStatus.test_step=0; 
-			TestStatus.error_code=4;			
+			TestStatus.error_code=4;	
+      LedBeeper.beeper=0x1f;			
 	}
 	printf ("\n\r 18v_ad= %d",AdcQueue.ad_18v);
 }
@@ -331,7 +349,8 @@ void Test3V3(void)//TestStep5
 	else
 	{
 		  TestStatus.test_step=0; 
-			TestStatus.error_code=5;			
+			TestStatus.error_code=5;	
+      LedBeeper.beeper=0x1f;			
 	}	
 		printf ("\n\r 3.3v_ad= %d",AdcQueue.ad_3v3);
 }
@@ -347,14 +366,15 @@ void TestI3V3(void)//TestStep6
 	else
 	{
 		  TestStatus.test_step=0; 
-			TestStatus.error_code=6;			
+			TestStatus.error_code=6;	
+      LedBeeper.beeper=0x1f;			
 	}	
 	printf ("\n\r I3.3v_ad= %d",AdcQueue.ad_i3v3);	
 }
 	
 void TestSurge(void)//TestStep7
 {
-	if ((AdcQueue.ad_surge>950)&&(AdcQueue.ad_surge<1100))//if ((AdcQueue.ad_surge>1862)&&(AdcQueue.ad_surge<2482))
+	if ((AdcQueue.ad_surge>1950)&&(AdcQueue.ad_surge<2150))//if ((AdcQueue.ad_surge>1862)&&(AdcQueue.ad_surge<2482))
 	{
 			TestStatus.test_step=8; 
 			TestStatus.test_percent=35;		
@@ -362,7 +382,8 @@ void TestSurge(void)//TestStep7
 	else
 	{
 		  TestStatus.test_step=0; 
-			TestStatus.error_code=7;			
+			TestStatus.error_code=7;	
+      LedBeeper.beeper=0x1f;			
 	}	
 	printf ("\n\r Surge_ad= %d",AdcQueue.ad_surge);		
 }
@@ -383,7 +404,8 @@ void TestTransformer(void)//TestStep8
 			else
 			{
 					TestStatus.test_step=0; 
-					TestStatus.error_code=8;			
+					TestStatus.error_code=8;	
+          LedBeeper.beeper=0x1f;					
 			}
 	   printf ("\n\r Transformer_ad= %d",AdcQueue.ad_transformer);						
      HAL_GPIO_WritePin(GPIOC, S_3V3_Pin, GPIO_PIN_RESET);//release 3.3V from current transformer			
@@ -420,7 +442,8 @@ void TestCommunation(void)//TestStep9
 			else
 					{
 						TestStatus.test_step=0; 
-						TestStatus.error_code=9;			
+						TestStatus.error_code=9;	
+            LedBeeper.beeper=0x1f;							
 					}
 	printf ("\n\r Comm_SucessCounter= %d",SucessCounter);							
 	CommunationCounter=700;
@@ -449,7 +472,8 @@ void TsetFan(void)//TestStep10
 			{
 				TestStatus.test_step=0; 
 				TestStatus.error_code=10;	
-        printf ("\n\r fan test fail!");				
+        printf ("\n\r fan test fail!");	
+        LedBeeper.beeper=0x1f;					
 			}	
 	  BoardControl.mask=0x2425;
 	  BoardControl.value=0;
@@ -472,7 +496,8 @@ void TestIgbtTemperature(void)//TestStep11
 	  else
 			{
 				TestStatus.test_step=0; 
-				TestStatus.error_code=11;			
+				TestStatus.error_code=11;		
+        LedBeeper.beeper=0x1f;					
 			}	
 		printf ("\n\r igbttemp= %d",igbttemp);
 	
@@ -480,22 +505,24 @@ void TestIgbtTemperature(void)//TestStep11
 	
 void TestOverCurrentProtect(void)//TestStep12
 {
-	static uint8_t CurrentProtectCounter=100;
+	static uint16_t CurrentProtectCounter=300;
 	static uint8_t CurrentProtectStep=0;	
 	switch (CurrentProtectStep)
 				{
-					case 0://
+					case 0://						
 							if ((CommuData[RSP_ERROR_LO]&0x05)==0)
 									{
 										HAL_GPIO_WritePin(S_5V_GPIO_Port, S_5V_Pin, GPIO_PIN_SET);
 										CurrentProtectStep=1;
-										CurrentProtectCounter=100;
+										CurrentProtectCounter=400;
 									}
 						  else
 							{
 									TestStatus.test_step=0; 
 									TestStatus.error_code=12;	
 								  CurrentProtectStep=0;
+								  printf ("\n\r overcurrent test fail!");	
+								  LedBeeper.beeper=0x1f;									
 							}
 						break;
 					case 1:
@@ -507,7 +534,7 @@ void TestOverCurrentProtect(void)//TestStep12
 										CurrentProtectStep=0;
 										TestStatus.test_step=13; 
 				            TestStatus.test_percent=60;		
-										CurrentProtectCounter=100;
+										CurrentProtectCounter=300;
 										printf ("\n\r overcurrent test past!");
 									}	
 							if (CurrentProtectCounter==0)
@@ -516,8 +543,9 @@ void TestOverCurrentProtect(void)//TestStep12
 									TestStatus.test_step=0; 
 									TestStatus.error_code=12;	
                   CurrentProtectStep=0;		
-									CurrentProtectCounter=100;
-                  printf ("\n\r overcurrent test fail!");									
+									CurrentProtectCounter=300;
+                  printf ("\n\r overcurrent test fail!");	
+                  LedBeeper.beeper=0x1f;										
 								}										
 					break;
 					default:
@@ -538,10 +566,11 @@ void TestStaticVlotageAD(void)//TestStep13
 	  else
 			{
 				TestStatus.test_step=0; 
-				TestStatus.error_code=13;			
+				TestStatus.error_code=13;	
+			  LedBeeper.beeper=0x1f;					
 			}
   printf ("\n\r static vlotage= %d",vlotage);
-printf ("\n\r voltage= %d",AdcQueue.voltage);			
+//printf ("\n\r voltage= %d",AdcQueue.voltage);			
 }
 	
 void TestStaticCurrentAD(void)//TestStep14
@@ -557,7 +586,8 @@ void TestStaticCurrentAD(void)//TestStep14
 	  else
 			{
 				TestStatus.test_step=0; 
-				TestStatus.error_code=14;			
+				TestStatus.error_code=14;	
+			  LedBeeper.beeper=0x1f;					
 			}	
   printf ("\n\r static current= %d",current);		  			
 }
@@ -570,6 +600,7 @@ void TestPanChecker(void)//TestStep15
 	switch (PanCheckerStep)
 				{
 					case 0://
+						    LoadTestReference=1;
                 HAL_GPIO_WritePin(S_LAMP_GPIO_Port,S_LAMP_Pin,GPIO_PIN_RESET);
 					      PanCheckerStep=1;
 						break;
@@ -577,7 +608,7 @@ void TestPanChecker(void)//TestStep15
 						 PanCheckerCounter++;
 					   if (PanCheckerCounter>20)
 						 {
-                PanCheckerCounter=700;	
+                PanCheckerCounter=200;	
                 PanCheckerStep=2;							 
 						 }									
 					break;
@@ -613,7 +644,7 @@ void TestPanChecker(void)//TestStep15
 											TestStatus.test_percent=75;	
 											BoardControl.mask=0x2223;
 											BoardControl.value=0;		
-											printf ("\n\r loadvalue= %d",CommuData[RSP_LOADTEST]);												
+											printf ("\n\r LoadTestValue= %d",CommuData[RSP_LOADTEST]);												
 										}	
                 else 
 										{
@@ -622,7 +653,8 @@ void TestPanChecker(void)//TestStep15
 											TestStatus.error_code=15;		
 											BoardControl.mask=0x2223;
 											BoardControl.value=0;		
-											PanCheckerStep=0;									
+											PanCheckerStep=0;		
+								      LedBeeper.beeper=0x1f;												
 										}									
 					break;								
 					default:
@@ -632,7 +664,8 @@ void TestPanChecker(void)//TestStep15
 	
 void TestIgbthDriver(void)//TestStep16
 {
-
+		BoardControl.mask=0x2223;
+		BoardControl.value=0;		
 		if (Signal.igbth)
 			 {
 					TestStatus.test_step=17; 
@@ -645,13 +678,16 @@ void TestIgbthDriver(void)//TestStep16
 				{
 					TestStatus.test_step=0; 
 					TestStatus.error_code=16;	
-          printf ("\n\r IGBTH test fail !");							
+          printf ("\n\r IGBTH test fail !");	
+				  LedBeeper.beeper=0x1f;						
 				}		
 	
 }
 	
 void TestIgbtlDriver(void)//TestStep17,jump options 18,20
 {
+		BoardControl.mask=0x2223;
+		BoardControl.value=0;	
 		if (Signal.igbtl)
 			 {
 
@@ -668,7 +704,8 @@ void TestIgbtlDriver(void)//TestStep17,jump options 18,20
 				{
 					TestStatus.test_step=0; 
 					TestStatus.error_code=17;		
-          printf ("\n\r IGBTL test fail !");						
+          printf ("\n\r IGBTL test fail !");		
+					LedBeeper.beeper=0x1f;						
 				}
 
 }
@@ -682,6 +719,8 @@ void TestCalibrate(void)//TestStep18
 	switch (CalibrateStep)
 				{
 					case 0://
+								  BoardControl.mask=0x2223;
+		              BoardControl.value=0;	
 						      current1=0;
 					        current2=0;
 									current1_ad=0;
@@ -689,12 +728,12 @@ void TestCalibrate(void)//TestStep18
 									current_delta=0;
 									current_fact=0;
 									current_base=0;	
+					        LoadTestReference=10;
                   TestStatus.test_percent=86;		
                   HAL_GPIO_WritePin(S_LAMP_GPIO_Port,S_LAMP_Pin,GPIO_PIN_SET);	
                   HAL_GPIO_WritePin(S_220V_GPIO_Port,S_220V_Pin,GPIO_PIN_SET);					
 					        CalibrateStep=1;
-									CalibrateCounter=700;
-
+									CalibrateCounter=300;
 						break;
 					case 1:
                   BoardControl.mask=0x3435;//restore current fact 
@@ -704,7 +743,7 @@ void TestCalibrate(void)//TestStep18
 									if (CalibrateCounter==0)
 										{
 											CalibrateStep=2;
-											CalibrateCounter=700;
+											CalibrateCounter=300;
 										}	
 						break;
 					case 2:
@@ -738,7 +777,7 @@ void TestCalibrate(void)//TestStep18
 									if (CalibrateCounter==0)
 										{
 											CalibrateStep=5;
-											CalibrateCounter=700;
+											CalibrateCounter=800;
 										}							
 	                break;
 					case 5:
@@ -758,13 +797,15 @@ void TestCalibrate(void)//TestStep18
 											TestStatus.test_step=0; 
 											TestStatus.error_code=18;		
                       CalibrateStep=0;	
-                      CalibrateCounter=200;										
+                      CalibrateCounter=200;		
+								      LedBeeper.beeper=0x1f;	
+                      LoadTestReference=1;										
 									}														
 						break;	
 					case 6:
 
 						      TestStatus.test_percent=87;						
-                  BoardControl.mask=0x2223;///adjust power output to 1800w and last for 5s
+                  BoardControl.mask=0x2223;///adjust power output to 1800w and last for 4s
 								  BoardControl.value=18000;	
                   if (CalibrateCounter>0)
 										CalibrateCounter--;
@@ -791,7 +832,9 @@ void TestCalibrate(void)//TestStep18
 									else
 									{
 											TestStatus.test_step=0; 
-											TestStatus.error_code=18;											
+											TestStatus.error_code=18;			
+								      LedBeeper.beeper=0x1f;		
+                      LoadTestReference=1;										
 									}														
 						break;	
 					case 8:
@@ -862,6 +905,7 @@ void TestCalibrate(void)//TestStep18
 						    TestStatus.test_percent=95;						
                 TestStatus.test_step=19;
 								CalibrateStep=0;
+					      LoadTestReference=1;
 								CalibrateCounter=200;	
 						break;
 											
@@ -882,6 +926,7 @@ void TestComplete(void)//TestStep20
 	  TestStatus.test_percent =100;
 	  HAL_GPIO_WritePin(S_LAMP_GPIO_Port,S_LAMP_Pin,GPIO_PIN_RESET);
 	  ResetTest();
+	  LedBeeper.beeper=0x31;
 	
 }
 	

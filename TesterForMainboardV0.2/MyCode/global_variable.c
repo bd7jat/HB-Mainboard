@@ -16,7 +16,7 @@ typedef unsigned       __INT64 uint64_t;*/
 
 uint32_t AdcTank[32];
 uint8_t BoardReveivedData[50];
-				
+uint8_t LoadTestReference;				
 PeripheralState LedBeeper;							
 AD_parameter    AdcQueue;
 flag Signal;

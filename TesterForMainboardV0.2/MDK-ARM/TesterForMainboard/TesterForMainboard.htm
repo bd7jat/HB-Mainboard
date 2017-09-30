@@ -3,7 +3,7 @@
 <title>Static Call Graph - [TesterForMainboard\TesterForMainboard.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image TesterForMainboard\TesterForMainboard.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060020: Last Updated: Fri Sep 29 14:57:12 2017
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060020: Last Updated: Sat Sep 30 16:35:56 2017
 <BR><P>
 <H3>Maximum Stack Usage =        168 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -826,7 +826,7 @@ Global Symbols
 <P><STRONG><a name="[6]"></a>SVC_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f1xx_it.o(i.SVC_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xb.o(RESET)
 </UL>
-<P><STRONG><a name="[8c]"></a>SendBoardCMD</STRONG> (Thumb, 86 bytes, Stack size 24 bytes, myuart.o(i.SendBoardCMD))
+<P><STRONG><a name="[8c]"></a>SendBoardCMD</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, myuart.o(i.SendBoardCMD))
 <BR><BR>[Stack]<UL><LI>Max Depth = 92<LI>Call Chain = SendBoardCMD &rArr; HAL_UART_Transmit_DMA &rArr; HAL_DMA_Start_IT &rArr; DMA_SetConfig
 </UL>
 <BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Transmit_DMA
@@ -861,7 +861,7 @@ Global Symbols
 <P><STRONG><a name="[36]"></a>SystemInit</STRONG> (Thumb, 70 bytes, Stack size 0 bytes, system_stm32f1xx.o(i.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f103xb.o(.text)
 </UL>
-<P><STRONG><a name="[91]"></a>Test18V</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, host.o(i.Test18V))
+<P><STRONG><a name="[91]"></a>Test18V</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, host.o(i.Test18V))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Test18V &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -869,7 +869,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[93]"></a>Test3V3</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, host.o(i.Test3V3))
+<P><STRONG><a name="[93]"></a>Test3V3</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, host.o(i.Test3V3))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = Test3V3 &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -877,7 +877,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[94]"></a>TestCalibrate</STRONG> (Thumb, 1138 bytes, Stack size 8 bytes, host.o(i.TestCalibrate))
+<P><STRONG><a name="[94]"></a>TestCalibrate</STRONG> (Thumb, 1196 bytes, Stack size 8 bytes, host.o(i.TestCalibrate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestCalibrate &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -886,7 +886,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[95]"></a>TestCommunation</STRONG> (Thumb, 148 bytes, Stack size 8 bytes, host.o(i.TestCommunation))
+<P><STRONG><a name="[95]"></a>TestCommunation</STRONG> (Thumb, 154 bytes, Stack size 8 bytes, host.o(i.TestCommunation))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestCommunation &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -894,7 +894,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[96]"></a>TestComplete</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, host.o(i.TestComplete))
+<P><STRONG><a name="[96]"></a>TestComplete</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, host.o(i.TestComplete))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = TestComplete &rArr; ResetTest
 </UL>
 <BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -903,7 +903,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[97]"></a>TestH18V</STRONG> (Thumb, 138 bytes, Stack size 8 bytes, host.o(i.TestH18V))
+<P><STRONG><a name="[97]"></a>TestH18V</STRONG> (Thumb, 144 bytes, Stack size 8 bytes, host.o(i.TestH18V))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestH18V &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -913,7 +913,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[99]"></a>TestI3V3</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, host.o(i.TestI3V3))
+<P><STRONG><a name="[99]"></a>TestI3V3</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, host.o(i.TestI3V3))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestI3V3 &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -921,7 +921,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[9a]"></a>TestIgbtTemperature</STRONG> (Thumb, 72 bytes, Stack size 8 bytes, host.o(i.TestIgbtTemperature))
+<P><STRONG><a name="[9a]"></a>TestIgbtTemperature</STRONG> (Thumb, 78 bytes, Stack size 8 bytes, host.o(i.TestIgbtTemperature))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestIgbtTemperature &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -929,7 +929,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[9b]"></a>TestIgbthDriver</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, host.o(i.TestIgbthDriver))
+<P><STRONG><a name="[9b]"></a>TestIgbthDriver</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, host.o(i.TestIgbthDriver))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestIgbthDriver &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -937,7 +937,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[9c]"></a>TestIgbtlDriver</STRONG> (Thumb, 74 bytes, Stack size 8 bytes, host.o(i.TestIgbtlDriver))
+<P><STRONG><a name="[9c]"></a>TestIgbtlDriver</STRONG> (Thumb, 92 bytes, Stack size 8 bytes, host.o(i.TestIgbtlDriver))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestIgbtlDriver &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -945,7 +945,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[9d]"></a>TestOverCurrentProtect</STRONG> (Thumb, 202 bytes, Stack size 8 bytes, host.o(i.TestOverCurrentProtect))
+<P><STRONG><a name="[9d]"></a>TestOverCurrentProtect</STRONG> (Thumb, 226 bytes, Stack size 8 bytes, host.o(i.TestOverCurrentProtect))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestOverCurrentProtect &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -954,7 +954,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[9e]"></a>TestPanChecker</STRONG> (Thumb, 292 bytes, Stack size 8 bytes, host.o(i.TestPanChecker))
+<P><STRONG><a name="[9e]"></a>TestPanChecker</STRONG> (Thumb, 300 bytes, Stack size 8 bytes, host.o(i.TestPanChecker))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestPanChecker &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -967,7 +967,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[9f]"></a>TestProgram</STRONG> (Thumb, 284 bytes, Stack size 8 bytes, host.o(i.TestProgram))
+<P><STRONG><a name="[9f]"></a>TestProgram</STRONG> (Thumb, 360 bytes, Stack size 8 bytes, host.o(i.TestProgram))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestProgram &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -977,7 +977,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[a0]"></a>TestShortCurrent</STRONG> (Thumb, 188 bytes, Stack size 8 bytes, host.o(i.TestShortCurrent))
+<P><STRONG><a name="[a0]"></a>TestShortCurrent</STRONG> (Thumb, 174 bytes, Stack size 8 bytes, host.o(i.TestShortCurrent))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestShortCurrent &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -986,7 +986,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[a1]"></a>TestStaticCurrentAD</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, host.o(i.TestStaticCurrentAD))
+<P><STRONG><a name="[a1]"></a>TestStaticCurrentAD</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, host.o(i.TestStaticCurrentAD))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestStaticCurrentAD &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -994,7 +994,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[a2]"></a>TestStaticVlotageAD</STRONG> (Thumb, 82 bytes, Stack size 8 bytes, host.o(i.TestStaticVlotageAD))
+<P><STRONG><a name="[a2]"></a>TestStaticVlotageAD</STRONG> (Thumb, 78 bytes, Stack size 8 bytes, host.o(i.TestStaticVlotageAD))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestStaticVlotageAD &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -1002,7 +1002,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[a3]"></a>TestSurge</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, host.o(i.TestSurge))
+<P><STRONG><a name="[a3]"></a>TestSurge</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, host.o(i.TestSurge))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestSurge &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -1010,7 +1010,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[a4]"></a>TestTransformer</STRONG> (Thumb, 102 bytes, Stack size 8 bytes, host.o(i.TestTransformer))
+<P><STRONG><a name="[a4]"></a>TestTransformer</STRONG> (Thumb, 108 bytes, Stack size 8 bytes, host.o(i.TestTransformer))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TestTransformer &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
@@ -1019,7 +1019,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task1_TestHandle
 </UL>
 
-<P><STRONG><a name="[a5]"></a>TsetFan</STRONG> (Thumb, 106 bytes, Stack size 8 bytes, host.o(i.TsetFan))
+<P><STRONG><a name="[a5]"></a>TsetFan</STRONG> (Thumb, 114 bytes, Stack size 8 bytes, host.o(i.TsetFan))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TsetFan &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_ReadPin
@@ -1185,7 +1185,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;task5_PeripheralControl
 </UL>
 
-<P><STRONG><a name="[35]"></a>main</STRONG> (Thumb, 138 bytes, Stack size 0 bytes, main.o(i.main))
+<P><STRONG><a name="[35]"></a>main</STRONG> (Thumb, 144 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = main &rArr; SystemClock_Config &rArr; HAL_RCC_ClockConfig &rArr; HAL_InitTick &rArr; HAL_NVIC_SetPriority &rArr; NVIC_SetPriority
 </UL>
 <BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_ADC1_Init
@@ -1208,7 +1208,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> event.o(.data)
 </UL>
-<P><STRONG><a name="[43]"></a>task1_TestHandle</STRONG> (Thumb, 292 bytes, Stack size 8 bytes, host.o(i.task1_TestHandle))
+<P><STRONG><a name="[43]"></a>task1_TestHandle</STRONG> (Thumb, 296 bytes, Stack size 8 bytes, host.o(i.task1_TestHandle))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = task1_TestHandle &rArr; TsetFan &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TsetFan
