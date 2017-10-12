@@ -14,6 +14,7 @@ extern PeripheralState LedBeeper;
 extern TestState TestStatus;
 extern BoardContent BoardControl;
 
+
 void task1_TestHandle(void);
 
 void ResetTest (void);
@@ -152,7 +153,7 @@ void ResetTest (void)
    HAL_GPIO_WritePin(PROG_START_GPIO_Port, PROG_START_Pin, GPIO_PIN_SET);
    HAL_GPIO_WritePin(S_PROG_GPIO_Port, S_PROG_Pin, GPIO_PIN_RESET);
 //HAL_GPIO_WritePin(GPIOC, S_LAMP_Pin, GPIO_PIN_SET);
-   //HAL_GPIO_WritePin(GPIOD, S_220V_Pin, GPIO_PIN_SET);			
+   //HAL_GPIO_WritePin(GPIOD, S_220V_Pin, GPIO_PIN_SET);	
 }
 
 void TestShortCurrent(void)//TestStep1,jump options 2,3,18
@@ -164,7 +165,7 @@ void TestShortCurrent(void)//TestStep1,jump options 2,3,18
 	if (ShortCurrentCounter>30)
 	{
 		ShortCurrentCounter=0;
-		if (AdcQueue.current<40)//detect overload of mainboard
+		if (AdcQueue.current<42)//detect overload of mainboard
 		   {
 					if (test_order==1)
 						 TestStatus.test_step=2;
@@ -374,7 +375,7 @@ void TestI3V3(void)//TestStep6
 	
 void TestSurge(void)//TestStep7
 {
-	if ((AdcQueue.ad_surge>1950)&&(AdcQueue.ad_surge<2150))//if ((AdcQueue.ad_surge>1862)&&(AdcQueue.ad_surge<2482))
+	if ((AdcQueue.ad_surge>1900)&&(AdcQueue.ad_surge<2200))//if ((AdcQueue.ad_surge>1862)&&(AdcQueue.ad_surge<2482))
 	{
 			TestStatus.test_step=8; 
 			TestStatus.test_percent=35;		
@@ -396,7 +397,7 @@ void TestTransformer(void)//TestStep8
 	if (TransformerCounter>30)
 	{
 		TransformerCounter=0;
-		if ((AdcQueue.ad_transformer>682)&&(AdcQueue.ad_transformer<945))//resistance of transfoemer approximate between 200R and 300R
+		if ((AdcQueue.ad_transformer>650)&&(AdcQueue.ad_transformer<945))//resistance of transfoemer approximate between 200R and 300R
 			{
 					TestStatus.test_step=9; 
 					TestStatus.test_percent=40;		
@@ -488,7 +489,7 @@ void TestIgbtTemperature(void)//TestStep11
 	igbttemp=CommuData[RSP_TEMPSINK_HI];
 	igbttemp=(igbttemp<<8)+CommuData[RSP_TEMPSINK_LO];
 	
-	if ((igbttemp<(AdcQueue.ad_envronment+200))&&(igbttemp>(AdcQueue.ad_envronment-200)))
+	if ((igbttemp<(AdcQueue.ad_envronment+450))&&(igbttemp>(AdcQueue.ad_envronment-450)))
 		  {
 				TestStatus.test_step=12; 
 				TestStatus.test_percent=55;		
@@ -498,7 +499,8 @@ void TestIgbtTemperature(void)//TestStep11
 				TestStatus.test_step=0; 
 				TestStatus.error_code=11;		
         LedBeeper.beeper=0x1f;					
-			}	
+			}
+    printf ("\n\r ad_envronment= %d",AdcQueue.ad_envronment);			
 		printf ("\n\r igbttemp= %d",igbttemp);
 	
 }
@@ -558,7 +560,7 @@ void TestStaticVlotageAD(void)//TestStep13
 	uint16_t vlotage=0;
 	vlotage=CommuData[RSP_VOLTAGE_HI];
 	vlotage=(vlotage<<8)+CommuData[RSP_VOLTAGE_LO];
-		if ((vlotage<(AdcQueue.voltage +40))&&(vlotage>(AdcQueue.voltage-40)))
+		if ((vlotage<(AdcQueue.voltage +70))&&(vlotage>(AdcQueue.voltage-70)))
 		  {
 				TestStatus.test_step=14; 
 				TestStatus.test_percent=65;		
@@ -569,8 +571,8 @@ void TestStaticVlotageAD(void)//TestStep13
 				TestStatus.error_code=13;	
 			  LedBeeper.beeper=0x1f;					
 			}
-  printf ("\n\r static vlotage= %d",vlotage);
-//printf ("\n\r voltage= %d",AdcQueue.voltage);			
+  printf ("\n\r StaticVlotage= %d",vlotage);
+  printf ("\n\r RealVoltage= %d",AdcQueue.voltage);			
 }
 	
 void TestStaticCurrentAD(void)//TestStep14
@@ -834,7 +836,9 @@ void TestCalibrate(void)//TestStep18
 											TestStatus.test_step=0; 
 											TestStatus.error_code=18;			
 								      LedBeeper.beeper=0x1f;		
-                      LoadTestReference=1;										
+                      LoadTestReference=1;		
+											CalibrateStep=0;
+											CalibrateCounter=200;										
 									}														
 						break;	
 					case 8:
@@ -879,16 +883,29 @@ void TestCalibrate(void)//TestStep18
 											CalibrateCounter=200;
 										}
 						break;									
-					case 10://				
-                  BoardControl.mask=0x3435;//write current fact 
-								  BoardControl.value=current_fact;	
-                  if (CalibrateCounter>0)
-										CalibrateCounter--;
-									if (CalibrateCounter==0)
-										{
-											CalibrateStep=11;
-											CalibrateCounter=200;
-										}
+					case 10://	
+                  if (current_fact<70)
+									{										
+												BoardControl.mask=0x3435;//write current fact 
+												BoardControl.value=current_fact;	
+												if (CalibrateCounter>0)
+													CalibrateCounter--;
+												if (CalibrateCounter==0)
+													{
+														CalibrateStep=11;
+														CalibrateCounter=200;
+													}
+									}
+									else
+									{
+										TestStatus.test_step=0; 
+										TestStatus.error_code=19;		
+										printf ("\n\r Calibrate out of range !");		
+										LedBeeper.beeper=0x1f;	
+                      LoadTestReference=1;		
+											CalibrateStep=0;
+											CalibrateCounter=200;	
+									}
 						break;
 					case 11:
                   BoardControl.mask=0x3233;//write current base 
@@ -916,6 +933,7 @@ void TestCalibrate(void)//TestStep18
 	
 void TestPowerCheck(void)//TestStep19
 {
+	
 	TestStatus.test_step=20; 
 }
 	

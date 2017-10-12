@@ -62,7 +62,8 @@ static uint8_t  BoardTx[10];
 void task2_Uart3Debug(void)
 {
 	task_delay[2]=1001;
-
+	//printf ("\n\r voltage_ad= %d",AdcQueue.ad_voltage);
+	//printf ("\n\r current_ad= %d",AdcQueue.ad_current);
 	//printf ("\n\r voltage= %d",vol);
 	//printf ("\n\r voltage= %d",AdcQueue.voltage);
 	//printf ("\n\r current= %d",AdcQueue.current);
