@@ -91,7 +91,7 @@ void load_test(void)
 					set_counter_pin_interrupt(1);		
 					pwm_start();					
 					uint8_t i;
-					for (i=0;i<250;i++)
+					for (i=0;i<255;i++)
 					{}					
 					pwm_stop();					
           heatstep++;		

@@ -121,7 +121,7 @@ int main(void)
  uint16_t eeprom_fact_buffer,eeprom_base_buffer;
  eeprom_fact_buffer=ReadFlashCurrentFactCalibration();
  eeprom_base_buffer=ReadFlashCurrentBaseCalibration();
- if ((eeprom_fact_buffer>=30)&&(eeprom_fact_buffer<=80)&&(eeprom_base_buffer>0)&&((eeprom_base_buffer&0x7fff)<=8000))
+ if ((eeprom_fact_buffer>=40)&&(eeprom_fact_buffer<=70)&&(eeprom_base_buffer>0)&&((eeprom_base_buffer&0x7fff)<=8000))
     {
 	    para.bCurfact=eeprom_fact_buffer;
 			para.bCurbase=eeprom_base_buffer;
