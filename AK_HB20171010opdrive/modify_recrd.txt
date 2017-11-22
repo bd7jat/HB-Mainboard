@@ -26,3 +26,11 @@ calibrate function done ,only calibrate current data
 increase current calibrate B value from 3000 to 8000
 13:34 2017/10/10
 
+
+15:10 2017/11/7
+reduce deadband time form 137 to 115
+increase loadtest time form 255 to 600, to increase energy applied to LC tank
+14:02 2017/11/17
+
+10:13 2017/11/22
+reduce max pwm from 1175 to 1150 to aviod resonance stage

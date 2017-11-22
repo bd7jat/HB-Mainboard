@@ -1364,21 +1364,21 @@ Image Symbol Table
     i.heat_stop_with_on_delay                0x080030e4   Section        0  heater.o(i.heat_stop_with_on_delay)
     i.load_check                             0x08003110   Section        0  heater.o(i.load_check)
     i.load_test                              0x0800315c   Section        0  heater.o(i.load_test)
-    i.main                                   0x080031ac   Section        0  main.o(i.main)
-    i.power_handle                           0x08003224   Section        0  heater.o(i.power_handle)
-    i.pwm_pulse_set                          0x080032e8   Section        0  tim.o(i.pwm_pulse_set)
-    i.pwm_start                              0x0800332c   Section        0  tim.o(i.pwm_start)
-    i.pwm_stop                               0x08003360   Section        0  tim.o(i.pwm_stop)
-    i.set_counter_pin_interrupt              0x08003378   Section        0  gpio.o(i.set_counter_pin_interrupt)
-    i.set_fan_speed                          0x08003390   Section        0  tim.o(i.set_fan_speed)
-    i.task0_AdSample                         0x080033f4   Section        0  adc.o(i.task0_AdSample)
-    i.task1_PowerControl                     0x080035e0   Section        0  heater.o(i.task1_PowerControl)
-    i.task2_UartSendReceive                  0x0800360c   Section        0  usart.o(i.task2_UartSendReceive)
-    i.task3_PeripheralControl                0x08003638   Section        0  gpio.o(i.task3_PeripheralControl)
-    i.task4_ErrorHandle                      0x08003650   Section        0  usart.o(i.task4_ErrorHandle)
-    i.task_countdown                         0x0800366c   Section        0  event.o(i.task_countdown)
-    i.task_scheduler                         0x08003694   Section        0  event.o(i.task_scheduler)
-    .constdata                               0x080036d8   Section       16  stm32f0xx_hal_rcc.o(.constdata)
+    i.main                                   0x080031b0   Section        0  main.o(i.main)
+    i.power_handle                           0x08003228   Section        0  heater.o(i.power_handle)
+    i.pwm_pulse_set                          0x080032ec   Section        0  tim.o(i.pwm_pulse_set)
+    i.pwm_start                              0x08003330   Section        0  tim.o(i.pwm_start)
+    i.pwm_stop                               0x08003364   Section        0  tim.o(i.pwm_stop)
+    i.set_counter_pin_interrupt              0x0800337c   Section        0  gpio.o(i.set_counter_pin_interrupt)
+    i.set_fan_speed                          0x08003394   Section        0  tim.o(i.set_fan_speed)
+    i.task0_AdSample                         0x080033f8   Section        0  adc.o(i.task0_AdSample)
+    i.task1_PowerControl                     0x080035e4   Section        0  heater.o(i.task1_PowerControl)
+    i.task2_UartSendReceive                  0x08003610   Section        0  usart.o(i.task2_UartSendReceive)
+    i.task3_PeripheralControl                0x0800363c   Section        0  gpio.o(i.task3_PeripheralControl)
+    i.task4_ErrorHandle                      0x08003654   Section        0  usart.o(i.task4_ErrorHandle)
+    i.task_countdown                         0x08003670   Section        0  event.o(i.task_countdown)
+    i.task_scheduler                         0x08003698   Section        0  event.o(i.task_scheduler)
+    .constdata                               0x080036dc   Section       16  stm32f0xx_hal_rcc.o(.constdata)
     .data                                    0x20000000   Section        4  stm32f0xx_hal.o(.data)
     uwTick                                   0x20000000   Data           4  stm32f0xx_hal.o(.data)
     .data                                    0x20000004   Section        4  system_stm32f0xx.o(.data)
@@ -1611,24 +1611,24 @@ Image Symbol Table
     heat_stop_with_off_delay                 0x080030b9   Thumb Code    32  heater.o(i.heat_stop_with_off_delay)
     heat_stop_with_on_delay                  0x080030e5   Thumb Code    32  heater.o(i.heat_stop_with_on_delay)
     load_check                               0x08003111   Thumb Code    60  heater.o(i.load_check)
-    load_test                                0x0800315d   Thumb Code    60  heater.o(i.load_test)
-    main                                     0x080031ad   Thumb Code   106  main.o(i.main)
-    power_handle                             0x08003225   Thumb Code   178  heater.o(i.power_handle)
-    pwm_pulse_set                            0x080032e9   Thumb Code    56  tim.o(i.pwm_pulse_set)
-    pwm_start                                0x0800332d   Thumb Code    42  tim.o(i.pwm_start)
-    pwm_stop                                 0x08003361   Thumb Code    20  tim.o(i.pwm_stop)
-    set_counter_pin_interrupt                0x08003379   Thumb Code    20  gpio.o(i.set_counter_pin_interrupt)
-    set_fan_speed                            0x08003391   Thumb Code    86  tim.o(i.set_fan_speed)
-    task0_AdSample                           0x080033f5   Thumb Code   442  adc.o(i.task0_AdSample)
-    task1_PowerControl                       0x080035e1   Thumb Code    34  heater.o(i.task1_PowerControl)
-    task2_UartSendReceive                    0x0800360d   Thumb Code    36  usart.o(i.task2_UartSendReceive)
-    task3_PeripheralControl                  0x08003639   Thumb Code    16  gpio.o(i.task3_PeripheralControl)
-    task4_ErrorHandle                        0x08003651   Thumb Code    14  usart.o(i.task4_ErrorHandle)
-    task_countdown                           0x0800366d   Thumb Code    30  event.o(i.task_countdown)
-    task_scheduler                           0x08003695   Thumb Code    58  event.o(i.task_scheduler)
-    aAPBAHBPrescTable                        0x080036d8   Data          16  stm32f0xx_hal_rcc.o(.constdata)
-    Region$$Table$$Base                      0x080036e8   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x08003708   Number         0  anon$$obj.o(Region$$Table)
+    load_test                                0x0800315d   Thumb Code    64  heater.o(i.load_test)
+    main                                     0x080031b1   Thumb Code   106  main.o(i.main)
+    power_handle                             0x08003229   Thumb Code   178  heater.o(i.power_handle)
+    pwm_pulse_set                            0x080032ed   Thumb Code    56  tim.o(i.pwm_pulse_set)
+    pwm_start                                0x08003331   Thumb Code    42  tim.o(i.pwm_start)
+    pwm_stop                                 0x08003365   Thumb Code    20  tim.o(i.pwm_stop)
+    set_counter_pin_interrupt                0x0800337d   Thumb Code    20  gpio.o(i.set_counter_pin_interrupt)
+    set_fan_speed                            0x08003395   Thumb Code    86  tim.o(i.set_fan_speed)
+    task0_AdSample                           0x080033f9   Thumb Code   442  adc.o(i.task0_AdSample)
+    task1_PowerControl                       0x080035e5   Thumb Code    34  heater.o(i.task1_PowerControl)
+    task2_UartSendReceive                    0x08003611   Thumb Code    36  usart.o(i.task2_UartSendReceive)
+    task3_PeripheralControl                  0x0800363d   Thumb Code    16  gpio.o(i.task3_PeripheralControl)
+    task4_ErrorHandle                        0x08003655   Thumb Code    14  usart.o(i.task4_ErrorHandle)
+    task_countdown                           0x08003671   Thumb Code    30  event.o(i.task_countdown)
+    task_scheduler                           0x08003699   Thumb Code    58  event.o(i.task_scheduler)
+    aAPBAHBPrescTable                        0x080036dc   Data          16  stm32f0xx_hal_rcc.o(.constdata)
+    Region$$Table$$Base                      0x080036ec   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x0800370c   Number         0  anon$$obj.o(Region$$Table)
     SystemCoreClock                          0x20000004   Data           4  system_stm32f0xx.o(.data)
     flag_write_current_fact_calibration      0x2000000a   Data           1  usart.o(.data)
     flag_write_current_base_calibration      0x2000000b   Data           1  usart.o(.data)
@@ -1669,9 +1669,9 @@ Memory Map of the image
 
   Image Entry point : 0x080000b1
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00003774, Max: 0x00004000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x00003778, Max: 0x00004000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x00003708, Max: 0x00004000, ABSOLUTE)
+    Execution Region ER_IROM1 (Base: 0x08000000, Size: 0x0000370c, Max: 0x00004000, ABSOLUTE)
 
     Base Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1843,23 +1843,23 @@ Memory Map of the image
     0x080030b8   0x0000002c   Code   RO         3095    i.heat_stop_with_off_delay  heater.o
     0x080030e4   0x0000002c   Code   RO         3096    i.heat_stop_with_on_delay  heater.o
     0x08003110   0x0000004c   Code   RO         3097    i.load_check        heater.o
-    0x0800315c   0x00000050   Code   RO         3098    i.load_test         heater.o
-    0x080031ac   0x00000078   Code   RO         2919    i.main              main.o
-    0x08003224   0x000000c4   Code   RO         3099    i.power_handle      heater.o
-    0x080032e8   0x00000044   Code   RO         2997    i.pwm_pulse_set     tim.o
-    0x0800332c   0x00000034   Code   RO         2998    i.pwm_start         tim.o
-    0x08003360   0x00000018   Code   RO         2999    i.pwm_stop          tim.o
-    0x08003378   0x00000018   Code   RO         2955    i.set_counter_pin_interrupt  gpio.o
-    0x08003390   0x00000064   Code   RO         3000    i.set_fan_speed     tim.o
-    0x080033f4   0x000001ec   Code   RO         2854    i.task0_AdSample    adc.o
-    0x080035e0   0x0000002c   Code   RO         3100    i.task1_PowerControl  heater.o
-    0x0800360c   0x0000002c   Code   RO         2754    i.task2_UartSendReceive  usart.o
-    0x08003638   0x00000018   Code   RO         2956    i.task3_PeripheralControl  gpio.o
-    0x08003650   0x0000001c   Code   RO         2755    i.task4_ErrorHandle  usart.o
-    0x0800366c   0x00000028   Code   RO         3171    i.task_countdown    event.o
-    0x08003694   0x00000044   Code   RO         3172    i.task_scheduler    event.o
-    0x080036d8   0x00000010   Data   RO         1375    .constdata          stm32f0xx_hal_rcc.o
-    0x080036e8   0x00000020   Data   RO         3273    Region$$Table       anon$$obj.o
+    0x0800315c   0x00000054   Code   RO         3098    i.load_test         heater.o
+    0x080031b0   0x00000078   Code   RO         2919    i.main              main.o
+    0x08003228   0x000000c4   Code   RO         3099    i.power_handle      heater.o
+    0x080032ec   0x00000044   Code   RO         2997    i.pwm_pulse_set     tim.o
+    0x08003330   0x00000034   Code   RO         2998    i.pwm_start         tim.o
+    0x08003364   0x00000018   Code   RO         2999    i.pwm_stop          tim.o
+    0x0800337c   0x00000018   Code   RO         2955    i.set_counter_pin_interrupt  gpio.o
+    0x08003394   0x00000064   Code   RO         3000    i.set_fan_speed     tim.o
+    0x080033f8   0x000001ec   Code   RO         2854    i.task0_AdSample    adc.o
+    0x080035e4   0x0000002c   Code   RO         3100    i.task1_PowerControl  heater.o
+    0x08003610   0x0000002c   Code   RO         2754    i.task2_UartSendReceive  usart.o
+    0x0800363c   0x00000018   Code   RO         2956    i.task3_PeripheralControl  gpio.o
+    0x08003654   0x0000001c   Code   RO         2755    i.task4_ErrorHandle  usart.o
+    0x08003670   0x00000028   Code   RO         3171    i.task_countdown    event.o
+    0x08003698   0x00000044   Code   RO         3172    i.task_scheduler    event.o
+    0x080036dc   0x00000010   Data   RO         1375    .constdata          stm32f0xx_hal_rcc.o
+    0x080036ec   0x00000020   Data   RO         3273    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Base: 0x20000000, Size: 0x00000920, Max: 0x00001000, ABSOLUTE)
@@ -1910,39 +1910,39 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       772         74          0         16        496       3352   adc.o
-        64          6          0          0          0        686   dma.o
-       108         20          0         24         10       1539   event.o
-       184         36          0          0         12       2779   flash.o
-         0          0          0         20        100       1060   global_variable.o
-       232         28          0          0          0       2292   gpio.o
-      1136        174          0         22          0       6583   heater.o
-        44         12          0          0         20        607   iwdg.o
-       248         14          0          0          0       2166   main.o
-        28          8        176          0       1024        576   startup_stm32f030x6.o
-        94         18          0          4          0       2914   stm32f0xx_hal.o
-      1086         56          0          0          0       7341   stm32f0xx_hal_adc.o
-       148          0          0          0          0       1270   stm32f0xx_hal_adc_ex.o
-       198         34          0          0          0      10945   stm32f0xx_hal_cortex.o
-       744         12          0          0          0       4107   stm32f0xx_hal_dma.o
-       340         56          0          0         32       4478   stm32f0xx_hal_flash.o
-       232         30          0          0          0       2997   stm32f0xx_hal_flash_ex.o
-       364         32          0          0          0       2815   stm32f0xx_hal_gpio.o
-       378         28          0          0          0       3163   stm32f0xx_hal_iwdg.o
-        56          6          0          0          0        770   stm32f0xx_hal_msp.o
-      1368         92         16          0          0       5121   stm32f0xx_hal_rcc.o
-       196         14          0          0          0       1248   stm32f0xx_hal_rcc_ex.o
-      1454        102          0          0          0      12313   stm32f0xx_hal_tim.o
-       268         10          0          0          0     200201   stm32f0xx_hal_tim_ex.o
-      1318         40          0          0          0      12338   stm32f0xx_hal_uart.o
-       200          0          0          0          0       1138   stm32f0xx_hal_uart_ex.o
-       296         56          0          2          0       5886   stm32f0xx_it.o
-        92         14          0          4          0       1257   system_stm32f0xx.o
-       740         86          0          0        120       4971   tim.o
-      1242        126          0         12        404      10863   usart.o
+       772         74          0         16        496       3424   adc.o
+        64          6          0          0          0        714   dma.o
+       108         20          0         24         10       1591   event.o
+       184         36          0          0         12       2859   flash.o
+         0          0          0         20        100       1088   global_variable.o
+       232         28          0          0          0       2360   gpio.o
+      1140        174          0         22          0       6771   heater.o
+        44         12          0          0         20        635   iwdg.o
+       248         14          0          0          0       2222   main.o
+        28          8        176          0       1024        592   startup_stm32f030x6.o
+        94         18          0          4          0       2990   stm32f0xx_hal.o
+      1086         56          0          0          0       7481   stm32f0xx_hal_adc.o
+       148          0          0          0          0       1294   stm32f0xx_hal_adc_ex.o
+       198         34          0          0          0      11065   stm32f0xx_hal_cortex.o
+       744         12          0          0          0       4187   stm32f0xx_hal_dma.o
+       340         56          0          0         32       4574   stm32f0xx_hal_flash.o
+       232         30          0          0          0       3045   stm32f0xx_hal_flash_ex.o
+       364         32          0          0          0       2867   stm32f0xx_hal_gpio.o
+       378         28          0          0          0       3231   stm32f0xx_hal_iwdg.o
+        56          6          0          0          0        798   stm32f0xx_hal_msp.o
+      1368         92         16          0          0       5209   stm32f0xx_hal_rcc.o
+       196         14          0          0          0       1276   stm32f0xx_hal_rcc_ex.o
+      1454        102          0          0          0      12553   stm32f0xx_hal_tim.o
+       268         10          0          0          0     200441   stm32f0xx_hal_tim_ex.o
+      1318         40          0          0          0      12598   stm32f0xx_hal_uart.o
+       200          0          0          0          0       1162   stm32f0xx_hal_uart_ex.o
+       296         56          0          2          0       5974   stm32f0xx_it.o
+        92         14          0          4          0       1293   system_stm32f0xx.o
+       740         86          0          0        120       5107   tim.o
+      1242        126          0         12        404      11059   usart.o
 
     ----------------------------------------------------------------------
-     13658       1184        224        108       2228     317776   Object Totals
+     13662       1184        224        108       2228     320460   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         28          0          0          4         10          0   (incl. Padding)
 
@@ -1984,15 +1984,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     13864       1200        224        108       2228     311740   Grand Totals
-     13864       1200        224        108       2228     311740   ELF Image Totals
-     13864       1200        224        108          0          0   ROM Totals
+     13868       1200        224        108       2228     314424   Grand Totals
+     13868       1200        224        108       2228     314424   ELF Image Totals
+     13868       1200        224        108          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                14088 (  13.76kB)
+    Total RO  Size (Code + RO Data)                14092 (  13.76kB)
     Total RW  Size (RW Data + ZI Data)              2336 (   2.28kB)
-    Total ROM Size (Code + RO Data + RW Data)      14196 (  13.86kB)
+    Total ROM Size (Code + RO Data + RW Data)      14200 (  13.87kB)
 
 ==============================================================================
 
