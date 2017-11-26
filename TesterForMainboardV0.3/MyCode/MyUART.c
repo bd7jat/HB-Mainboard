@@ -101,8 +101,7 @@ void task4_Uart1HMI(void)
 	    HMI_send_receive_chance=1;
   else
       HMI_send_receive_chance=0;
-	//TestStatus.error_code=20;
-	//TestStatus.test_percent=95;
+
 	if (HMI_send_receive_chance==0)
      Uart1HMISend();
 	if (HMI_send_receive_chance>0) 

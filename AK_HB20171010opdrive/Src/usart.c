@@ -175,7 +175,7 @@ void Parameters_Init(void)
 	para.mVoltage=2600;//max voltage                260.00V
 	pwm_pulse=0;//
 	para.bVolfact=1250;
-	para.bVolbase=25000;	
+	para.bVolbase=10000;	
 	uint8_t i;
 	for (i=0;i<MAX_CommBuffer;i++)
 	{com_buffer[i]=0;}

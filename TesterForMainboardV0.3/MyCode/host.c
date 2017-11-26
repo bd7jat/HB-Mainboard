@@ -39,17 +39,42 @@ void TestCalibrate(void);
 void TestPowerCheck(void);
 void TestComplete(void);
 
+const uint8_t PageProcess[]="page process";
+const uint8_t PageMain[]="page main";
 
 void task1_TestHandle(void)
 {
 	task_delay[1]=5;
-
+  static uint8_t changescreen[20];
+	uint8_t k;
 	if ((TestStatus.test_step==0)&&(LedBeeper.key_start==1))
+	{
+		LedBeeper.beeper=0x11;
+		for (k=0;k<12;k++)
+		    {
+					changescreen[k]=PageProcess[k];
+				}
+		changescreen[12]=0xff;	
+    changescreen[13]=0xff;
+    changescreen[14]=0xff;		
+    HAL_UART_Transmit_DMA(&huart1,changescreen,15);					
 		TestStatus.test_instruction=4;
+	}
   LedBeeper.key_start=0;
 		
 	if (LedBeeper.key_end==1)
+	{
+		LedBeeper.beeper=0x11;
+		for (k=0;k<9;k++)
+		    {
+					changescreen[k]=PageMain[k];
+				}
+		changescreen[9]=0xff;	
+    changescreen[10]=0xff;
+    changescreen[11]=0xff;		
+    HAL_UART_Transmit_DMA(&huart1,changescreen,12);						
 		TestStatus.test_instruction=5;
+	}
 	LedBeeper.key_end=0;
 	
 	if ((TestStatus.error_code>0)&&(TestStatus.error_code<20))
@@ -169,7 +194,7 @@ void ResetTest (void)
 	 TestStatus.test_step=0;
 	 
 //HAL_GPIO_WritePin(GPIOC, S_LAMP_Pin, GPIO_PIN_SET);
-   //HAL_GPIO_WritePin(GPIOD, S_220V_Pin, GPIO_PIN_SET);	
+//HAL_GPIO_WritePin(GPIOD, S_220V_Pin, GPIO_PIN_SET);	
 }
 
 void TestShortCurrent(void)//TestStep1,jump options 2,3,18
@@ -181,7 +206,9 @@ void TestShortCurrent(void)//TestStep1,jump options 2,3,18
 	if (ShortCurrentCounter>30)
 	{
 		ShortCurrentCounter=0;
-		if (AdcQueue.current<45)//detect overload of mainboard
+		uint8_t limit_current;
+		limit_current=45*AdcQueue.voltage/2200;
+		if (AdcQueue.current<limit_current)//detect overload of mainboard
 		   {
 					if (test_order==1)
 						 TestStatus.test_step=2;
@@ -360,7 +387,7 @@ void Test18V(void)//TestStep4
 void Test3V3(void)//TestStep5
 {
 	//limit ad= voltage*0.5*4096/3.3 can be simplified as ad=voltage*621
-	if ((AdcQueue.ad_3v3>1987)&&(AdcQueue.ad_3v3<2111))
+	if ((AdcQueue.ad_3v3>1950)&&(AdcQueue.ad_3v3<2111))
 	{
 			TestStatus.test_step=6; 
 			TestStatus.test_percent=25;		
@@ -377,7 +404,7 @@ void Test3V3(void)//TestStep5
 void TestI3V3(void)//TestStep6
 {
 	//limit ad= voltage*0.5*4096/3.3 can be simplified as ad=voltage*621
-	if ((AdcQueue.ad_i3v3>1987)&&(AdcQueue.ad_i3v3<2111))
+	if ((AdcQueue.ad_i3v3>1950)&&(AdcQueue.ad_i3v3<2111))
 	{
 			TestStatus.test_step=7; 
 			TestStatus.test_percent=30;		
@@ -578,7 +605,7 @@ void TestStaticVlotageAD(void)//TestStep13
 	uint16_t vlotage=0;
 	vlotage=CommuData[RSP_VOLTAGE_HI];
 	vlotage=(vlotage<<8)+CommuData[RSP_VOLTAGE_LO];
-		if ((vlotage<(AdcQueue.voltage +70))&&(vlotage>(AdcQueue.voltage-70)))
+		if ((vlotage<(AdcQueue.voltage +100))&&(vlotage>(AdcQueue.voltage-100)))
 		  {
 				TestStatus.test_step=14; 
 				TestStatus.test_percent=65;		
@@ -815,6 +842,7 @@ void TestCalibrate(void)//TestStep18
 									}
 									else
 									{
+										  printf ("\n\r Calibrate Start heatting fail !");
 											TestStatus.test_step=0; 
 											TestStatus.error_code=18;		
                       CalibrateStep=0;	
@@ -852,6 +880,7 @@ void TestCalibrate(void)//TestStep18
 									}
 									else
 									{
+										  printf ("\n\r Calibrate increase power fail !");
 											TestStatus.test_step=0; 
 											TestStatus.error_code=18;			
 								      LedBeeper.beeper=0x1f;		
@@ -903,7 +932,7 @@ void TestCalibrate(void)//TestStep18
 										}
 						break;									
 					case 10://	
-                  if (current_fact<=70)
+                  if ((current_fact<=65)&&(current_fact>=45))
 									{										
 												BoardControl.mask=0x3435;//write current fact 
 												BoardControl.value=current_fact;	
