@@ -8,7 +8,7 @@ void task6_FeedDog(void);
 void task6_FeedDog(void)
 {
 	task_delay[6]=103;
-	//HAL_IWDG_Refresh(&hiwdg);
+	HAL_IWDG_Refresh(&hiwdg);
 }
 
 

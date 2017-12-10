@@ -112,7 +112,7 @@ int main(void)
   MX_ADC1_Init();
 	HAL_ADCEx_Calibration_Start(&hadc1);
 	HAL_ADC_Start_DMA(&hadc1,AdcTank,32);
-  //MX_IWDG_Init();
+  MX_IWDG_Init();
   MX_USART1_UART_Init();
 	__HAL_UART_ENABLE_IT(&huart1, UART_IT_IDLE);
   MX_USART2_UART_Init();
@@ -136,7 +136,11 @@ int main(void)
 		 {}
 	 }
   /* USER CODE END 2 */
-	printf ("\n\r Mainboard diagnose system started! V0.31 20171206");
+	printf ("\n\r Mainboard diagnose system started! V0.32 20171209");
+	printf ("\n\r v=ad*1537/1000+5");
+	printf ("\n\r ad_current<=581,c=(ad*3727+372460)/10000");
+	printf ("\n\r ad_current>581,c=(ad*3865+292270)/10000");
+
 	/*how to use printf
 	1/print string, printf("abcdefg")
 	2/print variable ,printf("%d",test) or ("%x",test); //%d output 10formart,%x output 16formart

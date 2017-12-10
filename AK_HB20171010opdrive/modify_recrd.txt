@@ -38,3 +38,5 @@ reduce max pwm from 1175 to 1150 to aviod resonance stage
 reduce para.bVolbase from 25000 to 10000
 12:41 2017/11/26
 modify para.bCurfact range from 40-70 to 45-65
+12:34 2017/12/10
+one regin calibration

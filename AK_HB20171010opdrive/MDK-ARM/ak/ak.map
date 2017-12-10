@@ -1939,10 +1939,10 @@ Image component sizes
        296         56          0          2          0       5974   stm32f0xx_it.o
         92         14          0          4          0       1293   system_stm32f0xx.o
        740         86          0          0        120       5107   tim.o
-      1238        122          0         12        404      11059   usart.o
+      1238        122          0         12        404      11055   usart.o
 
     ----------------------------------------------------------------------
-     13658       1180        224        108       2228     320460   Object Totals
+     13658       1180        224        108       2228     320456   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         28          0          0          4         10          0   (incl. Padding)
 
@@ -1984,8 +1984,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     13864       1196        224        108       2228     314424   Grand Totals
-     13864       1196        224        108       2228     314424   ELF Image Totals
+     13864       1196        224        108       2228     314420   Grand Totals
+     13864       1196        224        108       2228     314420   ELF Image Totals
      13864       1196        224        108          0          0   ROM Totals
 
 ==============================================================================

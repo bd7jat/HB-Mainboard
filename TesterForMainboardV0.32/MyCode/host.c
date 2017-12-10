@@ -194,6 +194,7 @@ void ResetTest (void)
    HAL_GPIO_WritePin(PROG_START_GPIO_Port, PROG_START_Pin, GPIO_PIN_SET);
    HAL_GPIO_WritePin(S_PROG_GPIO_Port, S_PROG_Pin, GPIO_PIN_RESET);
 	 TestStatus.test_step=0;
+	
 	 
 //HAL_GPIO_WritePin(GPIOC, S_LAMP_Pin, GPIO_PIN_SET);
 //HAL_GPIO_WritePin(GPIOD, S_220V_Pin, GPIO_PIN_SET);	
@@ -773,8 +774,9 @@ void TestCalibrate(void)//TestStep18
 	static uint16_t cali_cur3=0;	
 	static uint16_t cali_cur4=0;
 	static uint16_t cali_cur5=0;	
-	static	uint16_t middle_current_bais=0;
-	static	uint16_t high_current_bais=0;	
+	static uint16_t low_current_bais;
+	static uint16_t middle_current_bais;
+	static uint16_t high_current_bais;			
 	static uint16_t decode_current_ad=0;
 	static uint16_t mainboard_current=0;
 	switch (CalibrateStep)
@@ -975,7 +977,7 @@ void TestCalibrate(void)//TestStep18
 									CalibrateCounter++;
 									if (CalibrateCounter>600)
 										{
-											if (((CommuData[RSP_ERROR_LO]&0xa0)==0)&&(AdcQueue.current>700))//make sure stove keep power outputting
+											if (((CommuData[RSP_ERROR_LO]&0xa0)==0)&&(AdcQueue.current>750))//make sure stove keep power outputting
 													{
 														mainboard_current=CommuData[RSP_CURRENT_HI];
 														mainboard_current=(CommuData[RSP_CURRENT_HI]<<8)+CommuData[RSP_CURRENT_LO];
@@ -1000,14 +1002,18 @@ void TestCalibrate(void)//TestStep18
 											}											
 										}														
 						break;	
-					case 7:		
+					case 7:					
                   BoardControl.mask=0x2223;//stop output
 								  BoardControl.value=0;		
                  	CalibrateCounter++;
 					        if (CalibrateCounter>300)
 									{
 										 CalibrateCounter=0;
-											if (cali_cur3>926)//calculate the bias of current in case of substandard mainboard
+										  if (cali_cur1>278)//calculate the bias of current in case of substandard mainboard
+												 low_current_bais=100*(cali_cur1-278)/278;
+											else
+												 low_current_bais=100*(278-cali_cur1)/278;
+											if (cali_cur3>926)
 													middle_current_bais=100*(cali_cur3-926)/926;
 											else
 													middle_current_bais=100*(926-cali_cur3)/926;
@@ -1016,7 +1022,7 @@ void TestCalibrate(void)//TestStep18
 											else
 													high_current_bais=100*(1667-cali_cur5)/1667;		
 											
-											if ((middle_current_bais<20)&&(high_current_bais<20))
+											if ((low_current_bais<20)&&(middle_current_bais<20)&&(high_current_bais<20))
 													{
 
 														CalibrateStep=8;
@@ -1030,7 +1036,8 @@ void TestCalibrate(void)//TestStep18
 															CalibrateCounter=0;		
 															LedBeeper.beeper=0x1f;	
 															LoadTestReference=1;														
-													}											
+													}		
+                      cali_cur5=97*cali_cur5/100;//take into account magnetic field can reduce current sample result a little													
 											printf ("\n\r cali-vol= %d",cali_vol);
 											printf ("\n\r cali-cur1= %d",cali_cur1);
 											printf ("\n\r cali-cur2= %d",cali_cur2);  
