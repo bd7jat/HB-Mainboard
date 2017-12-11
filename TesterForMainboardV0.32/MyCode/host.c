@@ -843,7 +843,7 @@ void TestCalibrate(void)//TestStep18
                   BoardControl.mask=0x2223;//adjust current to 1.36A 
 								  BoardControl.value=3000;					        
 									CalibrateCounter++;
-									if (CalibrateCounter>600)
+									if (CalibrateCounter>900)
 										{	                     								
 											if (((CommuData[RSP_ERROR_LO]&0xa0)==0)&&(AdcQueue.current>80))//make sure stove keep power outputting
 													{
@@ -1007,8 +1007,8 @@ void TestCalibrate(void)//TestStep18
 								  BoardControl.value=0;		
                  	CalibrateCounter++;
 					        if (CalibrateCounter>300)
-									{
-										 CalibrateCounter=0;
+									{												
+                      CalibrateCounter=0;
 										  if (cali_cur1>278)//calculate the bias of current in case of substandard mainboard
 												 low_current_bais=100*(cali_cur1-278)/278;
 											else
@@ -1036,8 +1036,8 @@ void TestCalibrate(void)//TestStep18
 															CalibrateCounter=0;		
 															LedBeeper.beeper=0x1f;	
 															LoadTestReference=1;														
-													}		
-                      cali_cur5=97*cali_cur5/100;//take into account magnetic field can reduce current sample result a little													
+													}
+											cali_cur5=98*cali_cur5/100;//take into account magnetic field can reduce current sample result a little											 													
 											printf ("\n\r cali-vol= %d",cali_vol);
 											printf ("\n\r cali-cur1= %d",cali_cur1);
 											printf ("\n\r cali-cur2= %d",cali_cur2);  

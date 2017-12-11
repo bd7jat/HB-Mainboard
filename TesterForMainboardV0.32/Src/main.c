@@ -137,9 +137,9 @@ int main(void)
 	 }
   /* USER CODE END 2 */
 	printf ("\n\r Mainboard diagnose system started! V0.32 20171209");
-	printf ("\n\r v=ad*1537/1000+5");
-	printf ("\n\r ad_current<=581,c=(ad*3727+372460)/10000");
-	printf ("\n\r ad_current>581,c=(ad*3865+292270)/10000");
+	printf ("\n\r v=ad*1520/1000+1");
+	printf ("\n\r ad_current<=498,c=(ad*3592+280000)/10000");
+	printf ("\n\r ad_current>498,c=(ad*3893+130000)/10000");
 
 	/*how to use printf
 	1/print string, printf("abcdefg")
