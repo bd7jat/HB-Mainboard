@@ -977,7 +977,7 @@ void TestCalibrate(void)//TestStep18
 									CalibrateCounter++;
 									if (CalibrateCounter>600)
 										{
-											if (((CommuData[RSP_ERROR_LO]&0xa0)==0)&&(AdcQueue.current>750))//make sure stove keep power outputting
+											if (((CommuData[RSP_ERROR_LO]&0xa0)==0)&&(AdcQueue.current>700))//make sure stove keep power outputting
 													{
 														mainboard_current=CommuData[RSP_CURRENT_HI];
 														mainboard_current=(CommuData[RSP_CURRENT_HI]<<8)+CommuData[RSP_CURRENT_LO];
@@ -1006,9 +1006,11 @@ void TestCalibrate(void)//TestStep18
                   BoardControl.mask=0x2223;//stop output
 								  BoardControl.value=0;		
                  	CalibrateCounter++;
+					        if (cali_cur1<230)
+										  cali_cur1=230;
 					        if (CalibrateCounter>300)
 									{												
-                      CalibrateCounter=0;
+                      CalibrateCounter=0;									
 										  if (cali_cur1>278)//calculate the bias of current in case of substandard mainboard
 												 low_current_bais=100*(cali_cur1-278)/278;
 											else

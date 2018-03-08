@@ -63,12 +63,12 @@ void task0_AdSample(void)
 	}
 	counter_adc++;	
   /*end ad filter and save the result to AdcQueue*/
-	AdcQueue.voltage=AdcQueue.ad_voltage*1520/1000+1;//unit is 0.1V
-	if (AdcQueue.ad_current<=498) 
+	AdcQueue.voltage=AdcQueue.ad_voltage*1521/1000+45;//unit is 0.1V
+	if (AdcQueue.ad_current<=560) 
  
-	    AdcQueue.current = (AdcQueue.ad_current*3592+280000)/10000;//uint is 0.01A
+	    AdcQueue.current = (AdcQueue.ad_current*3779+260000)/10000;//uint is 0.01A
 	else
-		  AdcQueue.current = (AdcQueue.ad_current*3893+130000)/10000;//uint is 0.01A
+		  AdcQueue.current = (AdcQueue.ad_current*3886+200000)/10000;//uint is 0.01A
 	
 	AdcQueue.power = AdcQueue.voltage*AdcQueue.current/100;//unit is 0.1W	
 }
