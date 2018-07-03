@@ -182,7 +182,7 @@ void task0_AdSample(void)
 			 para.rCurrent=700+200*(ad_current-calibration_table[4])/(calibration_table[5]-calibration_table[4]);	
 		 if (ad_current>=calibration_table[5])
 			 para.rCurrent=900+200*(ad_current-calibration_table[5])/(calibration_table[5]-calibration_table[4]);	
-		 if (ad_current<210)
+		 if (ad_current<200)
 			 para.rCurrent=0;	
 		 uint8_t power_factor;
 		 if (para.rCurrent<200)

@@ -46,7 +46,7 @@ extern void pwm_stop(void);
 extern void pwm_pulse_set(int16_t pulse);
 /* USER CODE END Includes */
 
-#define MainBaordVersion 0x126A//0x12-2018,0x6a-V1.06
+#define MainBaordVersion 0x24e3//1111111(7bit,max100,year)1111(4bit,max12,month)11111(5bit,max31,date),eg:2018.07.03-0010010011100011,0x24e3
 extern uint16_t task_delay[];
 extern uint16_t calibration_table[6];
 extern uint16_t pwm_pulse;

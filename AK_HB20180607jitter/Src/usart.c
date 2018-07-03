@@ -169,9 +169,9 @@ void Parameters_Init(void)
 	
 	para.mCurrent=1000;//max current                 10.00A
 	para.mPower=3000;//min continuously heat power  300.0W
-	para.mPulse=1160;//1265=19k,1230=19.5k,1200=20k,max pwm pulse
+	para.mPulse=1150;//1265=19k,1230=19.5k,1200=20k,max pwm pulse
 	para.mRsplength=16;//max returning data length    2
-	para.mTemperature=1300;//max heatsink temperatue  1100=95,1300=87
+	para.mTemperature=1250;//max heatsink temperatue  1100=95,1300=87
 	para.mVoltage=2600;//max voltage                260.00V
 	pwm_pulse=0;//
 	uint8_t i;
@@ -370,8 +370,8 @@ void PostToTxdata(void)
 	com_buffer[RSP_VOLTAGE_HI]=para.rVoltage>>8;
 	com_buffer[RSP_VOLTAGE_LO]=para.rVoltage;
 	
-	com_buffer[RSP_CURRENT_HI]=ad_current>>8;//para.rCurrent>>8;//
-	com_buffer[RSP_CURRENT_LO]=ad_current;//para.rCurrent;//
+	com_buffer[RSP_CURRENT_HI]=para.rCurrent>>8;//ad_current>>8;//
+	com_buffer[RSP_CURRENT_LO]=para.rCurrent;//ad_current;//
 	
 	com_buffer[RSP_PULSE_HI]=para.rPulse>>8;
 	com_buffer[RSP_PULSE_LO]=para.rPulse;	

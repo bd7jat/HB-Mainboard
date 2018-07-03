@@ -321,7 +321,7 @@ void heat_protect(void)
 			}			
 		if (flag_sink_overhot==1)
 			{
-				if (para.rTempsink>(para.mTemperature+200))
+				if (para.rTempsink>(para.mTemperature+300))
 						flag_sink_overhot=0;
 				else
 				{
